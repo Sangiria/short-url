@@ -1,4 +1,4 @@
-FROM golang:22.5
+FROM golang:1.22.5
 WORKDIR /short_url
 COPY go.mod go.sum ./
 RUN go mod download
