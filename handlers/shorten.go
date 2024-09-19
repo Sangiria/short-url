@@ -2,9 +2,10 @@ package handlers
 
 import (
 	"net/http"
-	"short_url/decoder"
+	// "short_url/decoder"
 	"short_url/models"
 	"short_url/utils"
+	"short_url/validator"
 
 	"github.com/labstack/echo/v4"
 )
@@ -26,28 +27,34 @@ func CreateURL(c echo.Context) error {
 
 func CreateShortURL(c echo.Context) error {
 	input := c.FormValue("input")
-	var shorten models.Shorten
-	db.Where("long_url = ?", input).Last(&shorten)
-	if shorten.ID == 0 {
-		ok := false
-		var result uint32
-		for !ok {
-			result = decoder.DecodeURL(input)
-			db.Where("hash = ?", result).First(&shorten)
-			if shorten.Hash != result {
-				ok = true
-				new_shorten := models.Shorten{
-					Hash: result,
-                    LongURL: input,
-				}
-				db.Create(&new_shorten)
-				return c.JSON(http.StatusCreated, new_shorten.Hash)
-			} else {
-				ok = false
-			}
-		}
+	if validator.ValidateURL(input){
+		return c.String(http.StatusOK, "correct url")
 	} else {
-		return c.JSON(http.StatusOK, shorten.Hash)
+		return c.String(http.StatusNotFound, "error")
 	}
-	return c.String(http.StatusNotFound, "error")
+
+	// var shorten models.Shorten
+	// db.Where("long_url = ?", input).Last(&shorten)
+	// if shorten.ID == 0 {
+	// 	ok := false
+	// 	var result uint32
+	// 	for !ok {
+	// 		result = decoder.DecodeURL(input)
+	// 		db.Where("hash = ?", result).First(&shorten)
+	// 		if shorten.Hash != result {
+	// 			ok = true
+	// 			new_shorten := models.Shorten{
+	// 				Hash: result,
+    //                 LongURL: input,
+	// 			}
+	// 			db.Create(&new_shorten)
+	// 			return c.JSON(http.StatusCreated, new_shorten.Hash)
+	// 		} else {
+	// 			ok = false
+	// 		}
+	// 	}
+	// } else {
+	// 	return c.JSON(http.StatusOK, shorten.Hash)
+	// }
+	// return c.String(http.StatusNotFound, "error")
 }
