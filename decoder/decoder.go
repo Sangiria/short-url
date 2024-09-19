@@ -1,11 +1,11 @@
 package decoder
 
 import (
-	"hash/crc32"
+	"github.com/teris-io/shortid"
 )
 
-func DecodeURL(x string) uint32 {
-	table := crc32.MakeTable(crc32.IEEE)
-	result := crc32.Checksum([]byte(x), table)
+func DecodeURL() string {
+	sid, _ := shortid.New(1, shortid.DefaultABC, 2342)
+	result, _ := sid.Generate()
 	return result
 }
