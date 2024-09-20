@@ -9,8 +9,8 @@ import (
 func main() {	
 	e := echo.New()
 	e.GET("/urls", handlers.GetAllURLs)
-	e.POST("/url", handlers.CreateURL)
 	e.POST("/short_url", handlers.CreateShortURL)
+	e.DELETE("url/:id", handlers.DeleteURL)
 	e.Logger.Fatal(e.Start(":1323"))
 
 

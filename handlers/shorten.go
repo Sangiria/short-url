@@ -14,15 +14,15 @@ func GetAllURLs(c echo.Context) error {
 	return c.JSON(http.StatusOK, urls)
 }
 
-func CreateURL(c echo.Context) error {
-	url := models.Shorten {
-		Short: c.FormValue("hash"),
-		LongURL: c.FormValue("long_url"),
-	}		
-    db.Create(&url)
-    return c.JSON(http.StatusCreated, url)
+func DeleteURL(c echo.Context) error {
+	var  shorten models.Shorten
+	db.Take(&shorten, c.Param("id"))
+	if shorten.ID == 0 {
+		return c.String(http.StatusNotFound, "no item found")
+	}
+	db.Delete(&shorten)
+	return c.String(http.StatusOK, "deleted")
 }
-
 func CreateShortURL(c echo.Context) error {
 	input := c.FormValue("input")
 
