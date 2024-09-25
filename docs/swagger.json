@@ -1,0 +1,12 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "хуй соси губой тряси.",
+        "title": "SHORT_URLS API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "api.shorter.danyatochka.ru",
+    "basePath": "/",
+    "paths": {}
+}

@@ -7,7 +7,8 @@ import (
 	"short_url/validator"
 	"github.com/labstack/echo/v4"
 )
-
+// GetAllUrls godoc
+// @Router /urls [get]
 func GetAllURLs(c echo.Context) error {
 	var urls []models.Shorten
 	db.Find(&urls)
