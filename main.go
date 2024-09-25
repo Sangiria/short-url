@@ -20,6 +20,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://shorter.danyatochka.ru", "http://localhost:4200"},
+		AllowMethods: []string{"handlers.GetAllURLs", "handlers.FindURL", "handlers.CreateShortURL", "handlers.DeleteURL"},
 		AllowCredentials: true, 
 	  }))
 	
