@@ -26,9 +26,8 @@ func DeleteURL(c echo.Context) error {
 }
 
 func FindURL(c echo.Context) error {
-	input := c.FormValue("input")
 	var shorten models.Shorten
-	db.Where("short = ?", input).First(&shorten)
+	db.Take(&shorten, c.QueryParam("code"))
 	if shorten.ID != 0 {
 		return c.JSON(http.StatusOK, shorten.LongURL)
 	} else {
