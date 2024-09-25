@@ -8,15 +8,26 @@ import (
 	"github.com/labstack/echo/v4"
 )
 // GetAllUrls godoc
-// @Description  получение всех записей
-// @Success      200  {object}  model.Shorten
-// @Router /urls [get]
+//	@Summary	Получение всех записей
+//	@Accept		json
+//	@Produce	json
+//	@Success	200	{array}	model.Shorten
+//	@Router		/urls [get]
 func GetAllURLs(c echo.Context) error {
 	var urls []models.Shorten
 	db.Find(&urls)
 	return c.JSON(http.StatusOK, urls)
 }
 
+// DeleteURL 		godoc
+//	@Summary		Удаление записи
+//	@Description	Удалить запись по ID
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		int	true	"id"
+//	@Success		200	{string}	"deleted"
+//	@Failure		404	{string}	"deleted"
+//	@Router			/url/{id} [delete]
 func DeleteURL(c echo.Context) error {
 	var  shorten models.Shorten
 	db.Where("id = ?", c.Param("id")).Take(&shorten)

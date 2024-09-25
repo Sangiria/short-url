@@ -11,12 +11,12 @@ import (
 )
  
 
-// @title SHORT_URLS API
-// @version 1.0
-// @description Сократитель ссылок
+//	@title			SHORT_URLS API
+//	@version		1.0
+//	@description	adfgfaffaf
 
-// @host shorter.danyatochka.ru
-// @BasePath /
+//	@host		shorter.danyatochka.ru
+//	@BasePath	/
 
 func main() {	
 	e := echo.New()

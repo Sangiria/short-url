@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "сократитель ссылок",
+        "description": "Cократитель ссылок",
         "title": "SHORT_URLS API",
         "contact": {},
         "version": "1.0"
