@@ -1,9 +1,10 @@
 package database
 
 import (
+	"short_url/enviroment"
 	"short_url/models"
 
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -12,12 +13,16 @@ var dbConnection *gorm.DB
 func GetDBConnection() *gorm.DB {
 	if dbConnection == nil {
 		connectDB()
+
 	}
 	return dbConnection
 }
 
 func connectDB() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("data.db"), &gorm.Config{})
+	dburl := enviroment.GoDotEnvVariable("DATABASE_URL")
+
+
+	db, err := gorm.Open(postgres.Open(dburl), &gorm.Config{})
 
 	if err != nil {
 		panic("failed to connect database")
