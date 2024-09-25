@@ -17,6 +17,7 @@ func main() {
 	e := echo.New()
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	e.GET("/urls", handlers.GetAllURLs)
+	e.GET("/url", handlers.FindURL)
 	e.POST("/short_url", handlers.CreateShortURL)
 	e.DELETE("url/:id", handlers.DeleteURL)
 	e.Logger.Fatal(e.Start(":1323"))
