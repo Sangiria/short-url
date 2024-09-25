@@ -17,7 +17,7 @@ func GetAllURLs(c echo.Context) error {
 
 func DeleteURL(c echo.Context) error {
 	var  shorten models.Shorten
-	db.Take(&shorten, c.Param("id"))
+	db.Where("id = ?", c.Param("id")).Take(&shorten)
 	if shorten.ID == 0 {
 		return c.String(http.StatusNotFound, "no item found")
 	}
@@ -27,7 +27,7 @@ func DeleteURL(c echo.Context) error {
 
 func FindURL(c echo.Context) error {
 	var shorten models.Shorten
-	db.Take(&shorten, c.QueryParam("code"))
+	db.Where("short = ?", c.QueryParam("code")).Take(&shorten)
 	if shorten.ID != 0 {
 		return c.JSON(http.StatusOK, shorten.LongURL)
 	} else {
