@@ -9,21 +9,19 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/swaggo/echo-swagger"
 )
-
-
-  
+ 
 
 // @title SHORT_URLS API
 // @version 1.0
-// @description хуй соси губой тряси.
+// @description Сократитель ссылок
 
-// @host api-shorter.danyatochka.ru
+// @host shorter.danyatochka.ru
 // @BasePath /
 
 func main() {	
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"https://shorter.danyatochka.ru", "http://localhost:4200"},
+		AllowOrigins: []string{"https://shorter.danyatochka.ru", "http://localhost:4200", "https://shorter.danyatochka.ru/swagger/index.html"},
 		AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
 		AllowCredentials: true, 
 	  }))

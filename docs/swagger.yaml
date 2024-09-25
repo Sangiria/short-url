@@ -1,9 +1,12 @@
 basePath: /
-host: api.shorter.danyatochka.ru
+host: shorter.danyatochka.ru
 info:
   contact: {}
-  description: хуй соси губой тряси.
+  description: сократитель ссылок
   title: SHORT_URLS API
   version: "1.0"
-paths: {}
+paths:
+  /urls:
+    get:
+      responses: {}
 swagger: "2.0"

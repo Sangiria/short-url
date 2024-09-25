@@ -14,17 +14,23 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/urls": {
+            "get": {
+                "responses": {}
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "api.shorter.danyatochka.ru",
+	Host:             "shorter.danyatochka.ru",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "SHORT_URLS API",
-	Description:      "хуй соси губой тряси.",
+	Description:      "сократитель ссылок",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

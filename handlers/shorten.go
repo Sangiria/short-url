@@ -8,6 +8,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 // GetAllUrls godoc
+// @Description  получение всех записей
+// @Success      200  {object}  model.Shorten
 // @Router /urls [get]
 func GetAllURLs(c echo.Context) error {
 	var urls []models.Shorten

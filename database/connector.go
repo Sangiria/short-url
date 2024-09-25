@@ -30,8 +30,6 @@ func connectDB() *gorm.DB {
 
 	_ = db.AutoMigrate(&models.Shorten{})
 
-	//все переменные с _ игнорируются, тут переменная err нахуй не нужна так что игнорим
-
 	dbConnection = db
 
 	return dbConnection
