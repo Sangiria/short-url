@@ -18,14 +18,14 @@ func main() {
 		AllowCredentials: true, 
 	  }))
 
-	e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
+	url := e.Group("/jwt")
+
+	url.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 		SigningMethod: "HS512",
 		SigningKey: []byte(enviroment.GoDotEnvVariable("Secretkey")),
 		TokenLookup: "cookie:URLCookie",
 	}))
-
-	url := e.Group("/jwt")
-	
+		
 	e.GET("/", handlers.Auth)
 	url.GET("/urls", handlers.GetAllURLs)
 	url.GET("/url", handlers.FindURL)
