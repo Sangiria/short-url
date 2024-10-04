@@ -10,16 +10,24 @@ import (
  
 func main() {	
 	e := echo.New()
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	url := e.Group("/jwt")
+	url.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://shorter.danyatochka.ru", "http://localhost:4200"},
 		AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
 		AllowCredentials: true, 
 	  }))
+
+	url.Use(middleware.JWTWithConfig(middleware.JWTConfig{
+		SigningMethod: "HS512",
+		SigningKey: []byte("pisyapopa"),
+		TokenLookup: "cookie:URLCookie",
+	}))
 	
-	e.GET("/urls", handlers.GetAllURLs)
-	e.GET("/url", handlers.FindURL)
-	e.POST("/short_url", handlers.CreateShortURL)
-	e.DELETE("url/:id", handlers.DeleteURL)
+	e.GET("/", handlers.Auth)
+	url.GET("/urls", handlers.GetAllURLs)
+	url.GET("/url", handlers.FindURL)
+	url.POST("/url", handlers.CreateShortURL)
+	url.DELETE("/url/:id", handlers.DeleteURL)
 	e.Logger.Fatal(e.Start(":1323"))
 
 
