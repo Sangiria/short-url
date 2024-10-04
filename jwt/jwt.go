@@ -1,7 +1,9 @@
 package jwt
 
 import (
+	"short_url/enviroment"
 	"time"
+
 	"github.com/golang-jwt/jwt"
 )
 
@@ -11,7 +13,7 @@ func CreateJwtToken() (string, error) {
 	}
 
 	rawToken := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
-	token, err := rawToken.SignedString([]byte("pisyapopa"))
+	token, err := rawToken.SignedString([]byte(enviroment.GoDotEnvVariable("Secretkey")))
 	
 	if err != nil {
 		return "", err
