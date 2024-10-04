@@ -23,7 +23,6 @@ func main() {
 	url.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 		SigningMethod: "HS512",
 		SigningKey: []byte(enviroment.GoDotEnvVariable("Secretkey")),
-		TokenLookup: "cookie:URLCookie",
 	}))
 		
 	e.GET("/", handlers.Auth)
